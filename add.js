@@ -2,7 +2,6 @@ const crypto = require('crypto');
 const fs = require('fs').promises;
 const zlib = require('zlib');
 
-
 async function add (file) {
   const fileObj = await fs.readFile(file)
   const content = fileObj.toString()

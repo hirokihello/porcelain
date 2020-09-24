@@ -3,6 +3,7 @@ const fs = require('fs').promises;
 const crypto = require('crypto');
 
 async function getFileInfoFromIndex () {
+  const message = process.argv[2]
   const indexFile = await fs.readFile(".git/index")
   const header = indexFile.slice(0, 12)
   let body = indexFile.slice(12)
@@ -23,18 +24,16 @@ async function getFileInfoFromIndex () {
     body = body.slice(62+fileLength+zeroPadding)
   }
   const treeHash = await genTree(fileInfo)
-  genCommitObject(treeHash, "first commit")
+  genCommitObject(treeHash, message)
 }
 
 async function genCommitObject (treeSha1, commitMessage) {
   const commitTime = (Date.now() / 1000).toFixed(0)
   const content = `tree ${treeSha1}\n` +
-  // `author hirokihello <iammyeye1@gmail.com> ${commitTime} +0900\n` +
-  // `committer hirokihello <iammyeye1@gmail.com> ${commitTime} +0900\n` +
-  `author hirokihello <iammyeye1@gmail.com> 1600538469 +0900\n` +
-  `committer hirokihello <iammyeye1@gmail.com> 1600538469 +0900\n` +
+    `author hirokihello <iammyeye1@gmail.com> ${commitTime} +0900\n` +
+    `committer hirokihello <iammyeye1@gmail.com> ${commitTime} +0900\n` +
     "\n" +
-    "first commit\n"
+    `${commitMessage}\n`
 
   const header= `commit ${content.length}\0`
   const store = header + content

@@ -50,7 +50,6 @@ async function updateIndex (files) {
   })
 }
 
-// 畳み込み演算で行うンゴ
 function entriesArray(filePathArray) {
   return filePathArray.map(async filePath =>  {
     const statInfo = await fs.stat(filePath, {bigint: true})
@@ -124,4 +123,3 @@ async function porcelainAdd () {
 }
 
 porcelainAdd()
-

@@ -9,7 +9,6 @@ async function genTree (fileContents=[]) {
   const shasum = crypto.createHash('sha1');
   shasum.update(store);
   const sha1 = shasum.digest('hex')
-console.log(content.length)
   // zlib.deflate(store, async function (err, result) { // bufferを引数で取れる！！　https://nodejs.org/api/zlib.html#zlib_class_zlib_deflate 便利！
   //   dirPath = __dirname + '/.git/objects/' + sha1.substring(0,2)
   //   filePath = dirPath + '/' + sha1.substring(2, 40)
@@ -21,9 +20,6 @@ console.log(content.length)
   //     console.log('Saved!');
   //   })
   // });
-console.log()
-console.log({store})
-console.log(Buffer.from(store))
   return sha1;
 }
 
@@ -48,4 +44,3 @@ function calcContent (fileContent) {
 module.exports = {
   genTree
 }
-

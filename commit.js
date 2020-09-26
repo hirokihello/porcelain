@@ -2,7 +2,7 @@ const { genTree } = require('./tree.js')
 const fs = require('fs').promises;
 const crypto = require('crypto');
 
-async function getFileInfoFromIndex () {
+async function porcelainCommit () {
   const message = process.argv[2]
   const indexFile = await fs.readFile(".git/index")
   const header = indexFile.slice(0, 12)
@@ -44,4 +44,4 @@ async function genCommitObject (treeSha1, commitMessage) {
   console.log(commitSha1)
 }
 
-getFileInfoFromIndex()
+porcelainCommit()

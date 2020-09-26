@@ -9,17 +9,17 @@ async function genTree (fileContents=[]) {
   const shasum = crypto.createHash('sha1');
   shasum.update(store);
   const sha1 = shasum.digest('hex')
-  // zlib.deflate(store, async function (err, result) { // bufferを引数で取れる！！　https://nodejs.org/api/zlib.html#zlib_class_zlib_deflate 便利！
-  //   dirPath = __dirname + '/.git/objects/' + sha1.substring(0,2)
-  //   filePath = dirPath + '/' + sha1.substring(2, 40)
-  //   await fs.mkdir(dirPath, { recursive: true }, (err) => {
-  //     if (err) throw err;
-  //   });
-  //   fs.writeFile(filePath, result, function (err) {
-  //     if (err) throw err;
-  //     console.log('Saved!');
-  //   })
-  // });
+  zlib.deflate(store, async function (err, result) { // bufferを引数で取れる！！　https://nodejs.org/api/zlib.html#zlib_class_zlib_deflate 便利！
+    dirPath = __dirname + '/.git/objects/' + sha1.substring(0,2)
+    filePath = dirPath + '/' + sha1.substring(2, 40)
+    await fs.mkdir(dirPath, { recursive: true }, (err) => {
+      if (err) throw err;
+    });
+    fs.writeFile(filePath, result, function (err) {
+      if (err) throw err;
+      console.log('Saved!');
+    })
+  });
   return sha1;
 }
 

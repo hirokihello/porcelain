@@ -41,7 +41,23 @@ async function genCommitObject (treeSha1, commitMessage) {
   shasum.update(store);
   const commitSha1 = shasum.digest('hex')
 
-  console.log(commitSha1)
+  zlib.deflate(store, async function (err, result) {
+    dirPath = __dirname + '/.git/objects/' + commitSha1.substring(0,2)
+    filePath = dirPath + '/' + commitSha1.substring(2, 40)
+    await fs.mkdir(dirPath, { recursive: true }, (err) => {
+      if (err) throw err;
+    });
+    fs.writeFile(filePath, result, function (err) {
+      if (err) throw err;
+      console.log('Saved!');
+    })
+  });
+
+  const refsPath = ".git/refs/heads/master"
+  fs.writeFile(refsPath, commitSha1, function (err) {
+    if (err) throw err;
+    console.log('Saved!');
+  })
 }
 
 porcelainCommit()

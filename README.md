@@ -1,4 +1,4 @@
-こんにちは〜！！
+こんにちは〜！！test
 インターンの[@hirokihello](https://twitter.com/maxyasuda)です！！！
 
 季節は早いものでuuumで働き出して、そしてエンジニアとして1年半が経とうとしています。早いですね〜〜〜。
@@ -576,7 +576,7 @@ async function add (file) {
 
 async function updateIndex (files) {
   const header = Buffer.alloc(12);
-  const fileNum = files.length 
+  const fileNum = files.length
 
   header.write('DIRC', 0);
   header.writeUInt32BE(2, 4);
@@ -1125,7 +1125,7 @@ porcelainAdd()
 ```zsh
 $ rm -rf .git
 $ git init
-$ node add.js sample.js 
+$ node add.js sample.js
 $ git ls-files --stage
 100644 a9e94074dc086aec661591147de3e821fa87fb36 0       sample.js
 $ git cat-file -p a9e94074dc086aec661591147de3e821fa87fb36
